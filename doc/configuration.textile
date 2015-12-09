@@ -40,4 +40,6 @@ The second parameter passed to the constructor is an inline JavaScript object th
 * Boolean *glossy*: whether to draw glossiness or not - _default *true*_
 * Boolean *display*: whether to enable the digital display or not - _default *true*_
 * String *theme*: see _doc/theming.txt_ for details
+* String *iconsrc*: the source for the icon
+* String *iconpos*: the position for the icon, can be {'middle','tl','bl','tr','br'}
 

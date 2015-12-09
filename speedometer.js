@@ -54,6 +54,11 @@ function Speedometer(Element) {
   if (!Speedometer.themes['default'])
     throw ('Default theme missing! Please load themes/default.js');
 
+  // draw an icon 
+  var Iconsrc = options.iconsrc === undefined ? false : options.iconsrc;
+  // Icon position {'middle','tl','bl','tr','br'}
+  var Iconpos = options.iconpos === undefined ? 'middle' : options.iconpos;
+
   var theme = Speedometer.themes[options.theme] || Speedometer.themes['default'];
 
   for (key in Speedometer.themes['default'])
@@ -139,6 +144,7 @@ function Speedometer(Element) {
       this.drawBackground ();
       this.drawCenter ();
       this.drawGloss ();
+      this.addIcon ();
 
       this.drawMeter ();
       this.drawHand ();
@@ -417,6 +423,52 @@ function Speedometer(Element) {
       currentAngle += angleIncr;
     }
     context.stroke ();
+  }
+
+  /**
+   * Draw an icon on diferents posittions Icon position {'middle','tl','bl','tr','br'}
+   * the icons size is calculated by the total size of the canvas
+   * @returns {undefined}
+   */
+  this.addIcon = function (){
+    if (!Iconsrc){ //By def don't draw anything
+      return;
+    }
+    var context = Context.foreground;
+    base_image = new Image();
+    base_image.src = Iconsrc;
+    base_image.onload = function(){
+      // Icon position {'middle','tl','bl','tr','br'}
+    var IconPosX = 0;
+    var IconPosY = 0;
+    //the icon must be Square []
+    var IconWidth = Size / 8;
+    var IconHeight = Size / 8;
+    switch (Iconpos){
+      case 'middle': //middle
+          IconPosX = Size * 0.5 - Size / 16;
+          IconPosY = Size * 0.5 + Size / 10;
+        break;
+      case 'tl': //top left
+          IconPosX = 0 - Size / 8 + Size / 7;
+          IconPosY = 0 - Size / 8 + Size / 7;
+        break;
+      case 'bl': //Botton left
+          IconPosX = 0 - Size / 8 + Size / 7;
+          IconPosY = Size - Size / 7;
+        break;
+      case 'tr': //Top right
+          IconPosX = Size - Size / 7;
+          IconPosY = 0 - Size / 8 + Size / 7;
+        break;
+      case 'br': //Botton right
+          IconPosX = Size - Size / 7;
+          IconPosY = Size - Size / 7;
+        break;
+
+    }
+    context.drawImage(base_image, IconPosX , IconPosY,IconWidth,IconHeight);
+    };
   }
 
   this.drawGloss = function ()
