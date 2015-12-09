@@ -435,7 +435,7 @@ function Speedometer(Element) {
       return;
     }
     var context = Context.foreground;
-    base_image = new Image();
+    var base_image = new Image();
     base_image.src = Iconsrc;
     base_image.onload = function(){
       // Icon position {'middle','tl','bl','tr','br'}
