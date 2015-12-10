@@ -83,7 +83,8 @@ function Speedometer(Element) {
       strings: theme.strings,
       font   : theme.font
     },
-    digits: theme.digits
+    digits: theme.digits,
+    globalalpha: theme.globalalpha
   };
 
   // Private stuff.
@@ -626,7 +627,7 @@ function Speedometer(Element) {
     // Draw background color
     context.fillStyle = Color.dial;
     context.ellipse (x, y, w, h);
-    context.globalAlpha = 0.45;
+    context.globalAlpha = Color.globalalpha;
     context.fill ();
 
     // Draw Rim
